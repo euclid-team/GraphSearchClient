@@ -1,5 +1,5 @@
 apply plugin: 'java'
-apply plugin: 'applications'
+apply plugin: 'application'
 
 mainClassName = "graphClient.XGraphClient"
 
