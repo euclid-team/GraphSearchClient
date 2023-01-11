@@ -2,16 +2,18 @@ package graphSearch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Stack;
 
 import graphClient.XGraphClient;
 
 public class GraphSearch {
 
-	public int afm = 141516; // AFM should be in form 5XXXX
-	public String firstname = "Jane";
-	public String lastname = "Doe";
+	public int afm = 58633; // AFM should be in form 5XXXX
+	public String firstname = "Anastasios";
+	public String lastname = "Fragkopoulos";
 
 	XGraphClient xgraph;
 
@@ -19,6 +21,90 @@ public class GraphSearch {
 		this.xgraph = xgraph;
 	}
 
+	public void DFS(long startNode, SGraph graph) {
+		Stack<Long> stack = new Stack<>();
+		ArrayList<Long> visited = new ArrayList<>();
+
+		stack.push(startNode);
+
+		while (!stack.isEmpty()) {
+			startNode = stack.pop();
+			if (!visited.contains(startNode)) {
+				visited.add(startNode);
+				long[] neighbors = xgraph.getNeighborsOf(startNode);
+				for (int i = 0; i < neighbors.length; i++) {
+					stack.push(neighbors[i]);
+					if (!visited.contains(neighbors[i])) {
+						SEdge newEdge = new SEdge(startNode, neighbors[i],
+								xgraph.getEdgeWeight(startNode, neighbors[i]));
+						graph.addEdge(newEdge);
+					}
+				}
+			}
+		}
+	}
+
+	public ArrayList<SEdge> Kruskal(SGraph graph) {
+		ArrayList<SEdge> edgeList = graph.getEdges();
+		ArrayList<Long> nodeList = graph.getNodes();
+		DisjointSet nodes = new DisjointSet(nodeList);
+
+		ArrayList<SEdge> result = new ArrayList<>();
+
+		SEdge currentEdge;
+		for (int i = 0; i < edgeList.size(); i++) {
+			currentEdge = edgeList.get(i);
+			if (nodes.find(currentEdge.nodeOne) != nodes.find(currentEdge.nodeTwo)) {
+				nodes.union(currentEdge.nodeOne, currentEdge.nodeTwo);
+				result.add(currentEdge);
+			}
+		}
+		return result;
+	}
+
+	public HashMap<Long, Long> maximuSpacingCluster(SGraph graph, int k) {
+		ArrayList<SEdge> edgeList = graph.getEdges();
+		ArrayList<Long> nodeList = graph.getNodes();
+		DisjointSet nodes = new DisjointSet(nodeList);
+
+		ArrayList<SEdge> mst = new ArrayList<>();
+
+		SEdge currentEdge;
+		for (int i = 0; i < edgeList.size(); i++) {
+			currentEdge = edgeList.get(i);
+			if (nodes.find(currentEdge.nodeOne) != nodes.find(currentEdge.nodeTwo)) {
+				nodes.union(currentEdge.nodeOne, currentEdge.nodeTwo);
+				mst.add(currentEdge);
+			}
+
+			if (mst.size() == nodeList.size() - k) {
+				break;
+			}
+		}
+
+		HashMap<Long, Long> results = new HashMap<>();
+		for (int i = 0; i < nodeList.size(); i++) {
+			Long clusterName = nodes.find(nodeList.get(i));
+			results.put(nodeList.get(i), clusterName);
+		}
+
+		return results;
+	}
+
+	public SEdge findHeviestEdge(SGraph graph) {
+		ArrayList<SEdge> edges = graph.getEdges();
+
+		SEdge heviestEdge = edges.get(0);
+		SEdge currentEdge;
+		for (int i = 0; i < edges.size(); i++) {
+			currentEdge = edges.get(i);
+			if (currentEdge.weight >= heviestEdge.weight) {
+				heviestEdge = currentEdge;
+			}
+		}
+
+		return heviestEdge;
+	}
 
 	public Result findResults() {
 		Result res = null;
@@ -27,69 +113,28 @@ public class GraphSearch {
 		// WRITE YOUR OWN CODE
 		// ////////////////////
 
-		// EXAMPLE CODE
-
-		// Example of creating the Result object
-		res = new Result();
-
-		// Retrieve the number of clusters (parameter k of maximum spacing clustering)
-		int numOfClusters = xgraph.getNumOfClusters();
-
-		// Retrieve the first node of the unknown graph
+		// Getting first node of the xgraph
 		long firstNode = xgraph.firstNode();
 
-		// Print the ID of the first node
-		System.out.println("The id of the first node is: " + firstNode);
+		// Making a graph
+		SGraph graph = new SGraph();
 
-		// Inform that GraphSearch starts
-		System.out.println("Graph search from node : " + firstNode);
+		// DFS algorithm
+		DFS(firstNode, graph);
 
-		// Retrieve the neighbors of the first node
-		long[] neighbors = xgraph.getNeighborsOf(firstNode);
+		// Creating Result object
+		res = new Result();
 
-		// Convert long[] to ArrayList<Long>
-//		Long[] a = new Long[10];
-//		Arrays.fill(a, 123L);
-//		ArrayList<Long> n = new ArrayList<Long>(Arrays.asList(a));
-//
-//		long[] input = new long[]{1,2,3,4};
-//		List<Long> output = new ArrayList<Long>();
-//		for (long value : input) {
-//		    output.add(value);
-//		}
-//
-		// Print all the neighbors of the firstNode
-		// Approach A
-		int numOfNeighbors = neighbors.length;
+		// Saving Results
+		res.n = graph.getNodes().size();
+		res.m = graph.getEdges().size();
+		res.heaviestEdge = findHeviestEdge(graph);
+		res.sGraph = graph;
 
-		for (int i = 0; i < numOfNeighbors; i++) {
-			System.out.println("Neighbor " + i + ", id: " + neighbors[i]);
-		}
+		// Bonus
+		res.mst.addAll(Kruskal(graph));
+		res.maxSpacingClusteringLabels = maximuSpacingCluster(graph, xgraph.getNumOfClusters());
 
-		// newline
-		System.out.println();
-
-		// Print all the neighbors of the firstNode
-		// Approach B
-		for (long id : neighbors) {
-			System.out.println("Neighbor id: " + id);
-		}
-
-		// WRITE ALL RESULTS INTO THE RESULT OBJECT
-
-		// COMPULSORY questions
-		// res.n = (Number of nodes, type: int)
-		// res.m =  (Number of edges, type: int)
-		// res.heaviestEdge = (The nodes of the heaviest edge of the undirected graph, type: SEdge)
-		// res.sGraph = (The xgraph as an undirected graph with the original node IDs and edge weights, type: SGraph)
-
-		// BONUS
-		// res.mst = (The edges of the MST, type: TreeSet<SEdge>)
-		// res.maxSpacingClusteringLabels = (The node labels of a maximum spacing clustering
-		// of the graph nodes, type: HashMap<Long, Long> )
-
-
-		// Return the result Object with the results of the computation
 		return res;
 	}
 

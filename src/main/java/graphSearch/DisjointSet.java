@@ -70,7 +70,7 @@ public class DisjointSet
         System.out.println();
     }
 
-    // Disjoint–Set data structure (Union–Find algorithm)
+    // Disjoint-Set data structure (Union-Find algorithm)
     public static void main(String[] args)
     {
         // universe of items
