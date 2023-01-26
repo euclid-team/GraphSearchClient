@@ -4,7 +4,7 @@
 
 ## How to run in terminal
 
-Για να δουλέψει χρειάζετε να κατεβάσεται το [gradle](https://gradle.org/install/).
+Για να δουλέψει χρειάζετε να κατεβάσετε το [gradle](https://gradle.org/install/).
 
 Αφού κάνετε clone το repo τρέξτε μεσα στο φάκελο:
 
