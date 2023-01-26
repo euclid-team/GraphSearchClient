@@ -1,6 +1,7 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "graphClient.XGraphClient"
 
 group 'org.example'
 version '1.0-SNAPSHOT'
