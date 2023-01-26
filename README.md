@@ -1,30 +1,30 @@
 # GraphSearch2022 (Εργασια 3)
 
-Υποχρεωτική εργασία 3 του μαθήματος αλγόριθμοι και δομές δεδομένων.
+Υποχρεωτική εργασία 3 του μαθήματος Αλγόριθμοι και Δομές Δεδομένων.
 
 ## How to run in terminal
 
-Για να δουλέψει χρειάζεται να κατεβάσεται το [gradle](https://gradle.org/install/).
+Για να δουλέψει χρειάζετε να κατεβάσεται το [gradle](https://gradle.org/install/).
 
-Αφού κάνεται clone το repo τρέχουμε μεσα στο φάκελο:
+Αφού κάνετε clone το repo τρέξτε μεσα στο φάκελο:
 
 ```bash
 gradle wrapper
 ```
 
-Για να το τρέξεται χρησιμοποιούμε για linux/mac:
+Για να το τρέξετε σε Linux/Mac:
 
 ```bash
 ./gradlew run
 ```
 
-και για windows:
+ενώ για windows:
 
 ```bash
 gradlew run
 ```
 
-Για να χρησιμοποιήσουμε arguments βάζουμε το flag:
+Για να χρησιμοποιήσετε arguments προσθέστε το παρακάτω flag:
 
 ```bash
 --args="<arguments-go-here>"
