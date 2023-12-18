@@ -1,16 +1,15 @@
 package graphSearch;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.TreeSet;
 
 import graphClient.XGraphClient;
 
 public class GraphSearch {
 
-	public int afm = 141516; // AFM should be in form 5XXXX
-	public String firstname = "Jane";
+	public int afm = 11111; // AFM should be in form 5XXXX
+	public String firstname = "John";
 	public String lastname = "Doe";
 
 	XGraphClient xgraph;
@@ -33,7 +32,7 @@ public class GraphSearch {
 		res = new Result();
 
 		// Retrieve the number of clusters (parameter k of maximum spacing clustering)
-		int numOfClusters = xgraph.getNumOfClusters();
+		// int numOfClusters = xgraph.getNumOfClusters();
 
 		// Retrieve the first node of the unknown graph
 		long firstNode = xgraph.firstNode();
@@ -45,6 +44,7 @@ public class GraphSearch {
 		System.out.println("Graph search from node : " + firstNode);
 
 		// Retrieve the neighbors of the first node
+		// The neighbors are given in NO particular order.
 		long[] neighbors = xgraph.getNeighborsOf(firstNode);
 
 		// Convert long[] to ArrayList<Long>
@@ -80,16 +80,13 @@ public class GraphSearch {
 		// COMPULSORY questions
 		// res.n = (Number of nodes, type: int)
 		// res.m =  (Number of edges, type: int)
-		// res.heaviestEdge = (The nodes of the heaviest edge of the undirected graph, type: SEdge)
-		// res.sGraph = (The xgraph as an undirected graph with the original node IDs and edge weights, type: SGraph)
+		// res.degreeArrayList = (Degrees in decreasing order, ArrayList<Integer>)
 
 		// BONUS
-		// res.mst = (The edges of the MST, type: TreeSet<SEdge>)
-		// res.maxSpacingClusteringLabels = (The node labels of a maximum spacing clustering
-		// of the graph nodes, type: HashMap<Long, Long> )
+		// res.bfsNodeSequence = ... ArrayList<Long>
+		// res.bfsTree = ... SGraph
 
-
-		// Return the result Object with the results of the computation
+		// Return the res (Result) Object with the results of the computation
 		return res;
 	}
 
