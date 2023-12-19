@@ -28,7 +28,7 @@ public class XGraphClient {
 	boolean verbose; // print information during the execution
 
 	public XGraphClient(boolean parVerbose, String parServerHost, int parServerPort, int parExecutionMode, int parnodes,
-			long parseed) {
+						long parseed) {
 		serverHost = parServerHost;
 		serverPort = parServerPort;
 		executionMode = parExecutionMode;
@@ -84,7 +84,7 @@ public class XGraphClient {
 					throw new Exception("Error: Result Object is null!");
 				}
 
-				System.out.println("I send to server: " + result);
+				System.out.println("Sending results to the server (large items are replaced with digests): " + result);
 				out.writeObject(result);
 				out.flush();
 
@@ -99,7 +99,7 @@ public class XGraphClient {
 				System.out.println("\nVerification of the submitted answer");
 				System.out.println("------------------------------------");
 				System.out.println(result.assessmentInfo(assessment));
-				
+
 				if (succeeded) {
 					boolean bonusQuestions = Result.assessmentBonusQuestions(assessment);
 					System.out.println("\nXGraphServer response: CORRECT answer to compulsory questions! Bonus: "
@@ -118,14 +118,14 @@ public class XGraphClient {
 					// Failure
 					String errmsg = in.readUTF();
 
-					System.out.println("\nXGraphServer response: Execution failed!");
+					System.out.println("\nXGraphSearchServer response: Execution failed!");
 
 					System.out.println("\nFailure description: " + errmsg);
 				}
 
-				System.out.println("Additional Information from GraphSearch server:");
+				System.out.println("Additional Information from GraphSearchServer:");
 				System.out.println(optionalMsg);
-				
+
 				in.close();
 				out.close();
 			} else {
@@ -223,7 +223,7 @@ public class XGraphClient {
 
 			out.writeLong(firstNode);
 			out.flush();
-			
+
 			out.writeLong(secondNode);
 			out.flush();
 
@@ -238,7 +238,7 @@ public class XGraphClient {
 		}
 		return weight;
 	}
-	
+
 	public Integer getNumOfClusters() {
 		Integer numOfClusters = null;
 
@@ -260,7 +260,7 @@ public class XGraphClient {
 		}
 		return numOfClusters;
 	}
-	
+
 	public static void main(String[] args) {
 		String serverHost;
 		int serverPort;
