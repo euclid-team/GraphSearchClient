@@ -69,7 +69,7 @@ public class Result implements Serializable {
 		// A bit value of 1 indicates failure
 		boolean assessmentCompulsory = false;
 
-		long compRes = res & Result.BIT_MASK_GRAPH_SEARCH_2022_COMPULSORY;
+		long compRes = res & Result.BIT_MASK_GRAPH_SEARCH_2023_COMPULSORY;
 		assessmentCompulsory = (compRes == 0);
 
 		return assessmentCompulsory;
@@ -79,7 +79,7 @@ public class Result implements Serializable {
 		// A bit value of 1 indicates failure
 		boolean assessmentBonus = false;
 
-		long bonusRes = res & Result.BIT_MASK_GRAPH_SEARCH_2022_BONUS;
+		long bonusRes = res & Result.BIT_MASK_GRAPH_SEARCH_2023_BONUS;
 		assessmentBonus = (bonusRes == 0);
 
 		return assessmentBonus;
