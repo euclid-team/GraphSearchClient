@@ -33,5 +33,5 @@ gradlew run
 Παράδειγμα:
 
 ```bash
-./gradlew run --args="true euclid.ee.duth.gr 4475 0 100 123"
+./gradlew run --args="true thales.ee.duth.gr 4475 0 100 123"
 ```
