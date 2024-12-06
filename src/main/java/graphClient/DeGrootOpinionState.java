@@ -17,7 +17,7 @@ public class DeGrootOpinionState implements Serializable {
 		// Ideally, opinions.length and uuids.size() should be equal but is not
 		// because the politicians don't have a dedicated uuid
 		for (int i = 0; i < uuids.size(); i++) {
-			this.opinionVector.put(uuids.get(new Integer(i)), opinions[i]);
+			this.opinionVector.put(uuids.get(i), opinions[i]);
 		}
 
 		System.out.println();
