@@ -61,6 +61,9 @@ public class Result implements Serializable {
 	public static final int BIT_MASK_GRAPH_SEARCH_2023_COMPULSORY = BIT_N | BIT_M | BIT_DEGREE_ARRAY;
 	public static final int BIT_MASK_GRAPH_SEARCH_2023_BONUS = BIT_BFS_NODE_SEQUENCE | BIT_BFS_TREE;
 
+	public static final int BIT_MASK_GRAPH_SEARCH_2024_COMPULSORY = BIT_N | BIT_M | BIT_BFS_NODE_SEQUENCE | BIT_DFS_NODE_SEQUENCE;
+	public static final int BIT_MASK_GRAPH_SEARCH_2024_BONUS = BIT_SGRAPH | BIT_MST;
+
 //	public static final int BIT_MASK_GRAPH_SEARCH_2022_COMPULSORY = BIT_N | BIT_M | BIT_BFS_NODE_SEQUENCE
 //			| BIT_MST;
 //	public static final int BIT_MASK_GRAPH_SEARCH_2022_BONUS = BIT_CLUSTERING;
@@ -69,7 +72,7 @@ public class Result implements Serializable {
 		// A bit value of 1 indicates failure
 		boolean assessmentCompulsory = false;
 
-		long compRes = res & Result.BIT_MASK_GRAPH_SEARCH_2023_COMPULSORY;
+		long compRes = res & Result.BIT_MASK_GRAPH_SEARCH_2024_COMPULSORY;
 		assessmentCompulsory = (compRes == 0);
 
 		return assessmentCompulsory;
@@ -79,7 +82,7 @@ public class Result implements Serializable {
 		// A bit value of 1 indicates failure
 		boolean assessmentBonus = false;
 
-		long bonusRes = res & Result.BIT_MASK_GRAPH_SEARCH_2023_BONUS;
+		long bonusRes = res & Result.BIT_MASK_GRAPH_SEARCH_2024_BONUS;
 		assessmentBonus = (bonusRes == 0);
 
 		return assessmentBonus;
@@ -273,7 +276,6 @@ public class Result implements Serializable {
 	public String toString() {
 //		String str = "ResultMsg: nodeID:=" + maxDegreeNodeID + ", degree:=" + maxDegree + ", n:=" + n + ", m:=" + m;
 		String str = "ResultMsg: n:=" + n + ", m:=" + m
-//				+ ", dfsNodeSequence: " + (dfsNodeSequence != null ? Tools.getHexDigestOfObject(dfsNodeSequence) : null)
 //				+ ", dfsTree: " + (dfsTree!=null?dfsTree.getHexDigest():null);
 //				+ ", bipartite: " + graphIsBipartite
 //				+ ", odd cycle edge: " + oddCycleEdge;
@@ -281,31 +283,32 @@ public class Result implements Serializable {
 //				+ ", Graph Type (0:No euler path or cycle, 1: Euler path, 2: Euler cycle): " + graphType
 //				+ ", EulerData: " + (eulerData != null ? Tools.getHexDigestOfObject(eulerData) : null);
 //				+ ", heaviestEdge: " + (heaviestEdge != null ? heaviestEdge.toString() : null)
-//				+ ", SGraph: " + (sGraph != null ? Tools.getHexDigestOfObject(sGraph) : null)
-//				+ ", mst: " + (mst != null ? Tools.getHexDigestOfObject(mst) : null)
 //				+ ", maxSpacingClustering: " + (maxSpacingClusteringLabels != null ? Tools.getHexDigestOfObject(maxSpacingClusteringLabels) : null);
-				+ ", degreeArray: " + (degreeArray != null ? Tools.getHexDigestOfObject(degreeArray) : null)
+//				+ ", degreeArray: " + (degreeArray != null ? Tools.getHexDigestOfObject(degreeArray) : null)
 				+ ", bfsNodeSequence: " + (bfsNodeSequence != null? Tools.getHexDigestOfObject(bfsNodeSequence):null)
-				+ ", bfsTree: " + (bfsTree!=null?bfsTree.getHexDigest():null);
+				+ ", dfsNodeSequence: " + (dfsNodeSequence != null ? Tools.getHexDigestOfObject(dfsNodeSequence) : null)
+				+ ", SGraph: " + (sGraph != null ? Tools.getHexDigestOfObject(sGraph) : null)
+				+ ", mst: " + (mst != null ? Tools.getHexDigestOfObject(mst) : null);
+//				+ ", bfsTree: " + (bfsTree!=null?bfsTree.getHexDigest():null);
 		return str;
 	}
 
 	public String toStringLong() {
 //		String str = "ResultMsg: nodeID:=" + maxDegreeNodeID + ", degree:=" + maxDegree + ", n:=" + n + ", m:=" + m;
 		String str = "ResultMsg: n:=" + n + ", m:=" + m
-//				+ ", dfsNodeSequence: " + (dfsNodeSequence != null ? Tools.arrayListToString(dfsNodeSequence) : null)
 //				+ ", Number of odd degree nodes: " + numOfNodesWithOddDegree
 //				+ ", Graph Type (0:No euler path or cycle, 1: Euler path, 2: Euler cycle): " + graphType
 //				+ ", EulerData: " + (eulerData != null ? Tools.arrayListToString(eulerData) : null)
 //				+ ", bipartite: " + graphIsBipartite
 //				+ ", odd cycle edge: " + oddCycleEdge
 //				+ ", heaviestEdge: " + (heaviestEdge != null ? heaviestEdge.toString() : null)
-//				+ ", SGraph: " + (sGraph != null ? Tools.getHexDigestOfObject(sGraph) : null)
-//				+ ", mst: " + (mst != null ? Tools.getHexDigestOfObject(mst) : null)
 //				+ ", maxSpacingClustering: " + (maxSpacingClusteringLabels != null ? Tools.getHexDigestOfObject(maxSpacingClusteringLabels) : null);
-				+ ", degreeArray: " + (degreeArray != null ? Tools.arrayListToString(degreeArrayList) : null)
+//				+ ", degreeArray: " + (degreeArray != null ? Tools.arrayListToString(degreeArrayList) : null)
 				+ ", bfsNodeSequence: " + (bfsNodeSequence != null ? Tools.arrayListToString(bfsNodeSequence) : null)
-				+ ", bfsTree: " + (bfsTree!=null?bfsTree.getHexDigest():null);
+				+ ", dfsNodeSequence: " + (dfsNodeSequence != null ? Tools.arrayListToString(dfsNodeSequence) : null)
+				+ ", SGraph: " + (sGraph != null ? Tools.getHexDigestOfObject(sGraph) : null)
+				+ ", mst: " + (mst != null ? Tools.getHexDigestOfObject(mst) : null);
+//				+ ", bfsTree: " + (bfsTree!=null?bfsTree.getHexDigest():null);
 		return str;
 	}
 
@@ -315,14 +318,14 @@ public class Result implements Serializable {
 //		info += "\nNumber of nodes with odd degree (" + numOfNodesWithOddDegree + ") -> "
 //				+ (((assessment & BIT_NUM_NODES_WITH_ODD_DEGREE) == 0) ? "OK" : "Wrong answer");
 //		info += "\nNumber of nodes with even degree (" + numOfNodesWithEvenDegree + ") -> "+ (((assessment & BIT_NUM_NODES_WITH_EVEN_DEGREE) == 0)? "OK": "Wrong answer");
-		info += "\nSorted degree array -> " + (((assessment & BIT_DEGREE_ARRAY) == 0)? "OK": "Wrong answer");
-		info += "\n(optional) BFS Node Sequence -> "+ (((assessment & BIT_BFS_NODE_SEQUENCE) == 0)? "OK": "Wrong answer");
-		info += "\n(optional) BFS Tree -> "+ (((assessment & BIT_BFS_TREE) == 0)? "OK": "Wrong answer");
-//		info += "\nDFS Node Sequence -> " + (((assessment & BIT_DFS_NODE_SEQUENCE) == 0) ? "OK" : "Wrong answer");
+//		info += "\nSorted degree array -> " + (((assessment & BIT_DEGREE_ARRAY) == 0)? "OK": "Wrong answer");
+		info += "\nBFS Node Sequence -> "+ (((assessment & BIT_BFS_NODE_SEQUENCE) == 0)? "OK": "Wrong answer");
+//		info += "\n(optional) BFS Tree -> "+ (((assessment & BIT_BFS_TREE) == 0)? "OK": "Wrong answer");
+		info += "\nDFS Node Sequence -> " + (((assessment & BIT_DFS_NODE_SEQUENCE) == 0) ? "OK" : "Wrong answer");
 //		info += "\nDFS Graph Type (Euler etc.) -> " + (((assessment & BIT_EULER_GRAPH) == 0) ? "OK" : "Wrong answer");
 //		info += "\nHeaviest edge -> "+ (((assessment & BIT_HEAVIEST_EDGE) == 0)? "OK": "Wrong answer");
-//		info += "\nSGraph -> "+ (((assessment & BIT_SGRAPH) == 0)? "OK": "Wrong answer");
-//		info += "\n(optional) MST -> "+ (((assessment & BIT_MST) == 0)? "OK": "Wrong answer");
+		info += "\n(bonus) SGraph -> "+ (((assessment & BIT_SGRAPH) == 0)? "OK": "Wrong answer");
+		info += "\n(bonus) MST -> "+ (((assessment & BIT_MST) == 0)? "OK": "Wrong answer");
 //		info += "\n(bonus) DFS Tree -> "+ (((assessment & BIT_DFS_TREE) == 0)? "OK": "Wrong answer");
 //		info += "\n(bonus) Pair with Max Num of Common Pairs -> "+ (((assessment & BIT_PAIR_WITH_MAX_NUM_OF_COMMON_NEIGHBORS) == 0)? "OK": "Wrong answer");
 //		info += "\n(bonus) Max Num Of Common Neighbors (" + maxNumOfCommonNeighbors + ") -> "+ (((assessment & BIT_MAX_NUM_OF_COMMON_NEIGHBORS) == 0)? "OK": "Wrong answer");

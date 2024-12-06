@@ -79,13 +79,15 @@ public class GraphSearch {
 
 		// COMPULSORY questions
 		// res.n = (Number of nodes, type: int)
-		// res.m =  (Number of edges, type: int)
-		// res.degreeArrayList = (Degrees in decreasing order, ArrayList<Integer>)
+		// res.m = (Number of edges, type: int)
+		// res.bfsNodeSequence = ... type: ArrayList<Long> (Add Nodes in the Right BFS visiting Order)
+		// res.dfsNodeSequence = ... type: ArrayList<Long> (Add Nodes in the Right DFS visiting Order)
 
 		// BONUS
-		// res.bfsNodeSequence = ... ArrayList<Long>
-		// res.bfsTree = ... SGraph
+		// res.sGraph = ... type: SGraph (This object s used to store the simple undirected weighted graph, nodes SNode and weighted edges SEdge)
+		// res.mst = ... type: TreeSet<SEdge> (The edges of the MST of sGraph)
 
+		// Return the RESULTS to be sent to the server
 		// Return the res (Result) Object with the results of the computation
 		return res;
 	}
