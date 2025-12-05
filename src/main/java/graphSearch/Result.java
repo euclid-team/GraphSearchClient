@@ -324,8 +324,8 @@ public class Result implements Serializable {
 		info += "\nDFS Node Sequence -> " + (((assessment & BIT_DFS_NODE_SEQUENCE) == 0) ? "OK" : "Wrong answer");
 //		info += "\nDFS Graph Type (Euler etc.) -> " + (((assessment & BIT_EULER_GRAPH) == 0) ? "OK" : "Wrong answer");
 //		info += "\nHeaviest edge -> "+ (((assessment & BIT_HEAVIEST_EDGE) == 0)? "OK": "Wrong answer");
-		info += "\n(bonus) SGraph -> "+ (((assessment & BIT_SGRAPH) == 0)? "OK": "Wrong answer");
-		info += "\n(bonus) MST -> "+ (((assessment & BIT_MST) == 0)? "OK": "Wrong answer");
+//		info += "\n(bonus) SGraph -> "+ (((assessment & BIT_SGRAPH) == 0)? "OK": "Wrong answer");
+//		info += "\n(bonus) MST -> "+ (((assessment & BIT_MST) == 0)? "OK": "Wrong answer");
 //		info += "\n(bonus) DFS Tree -> "+ (((assessment & BIT_DFS_TREE) == 0)? "OK": "Wrong answer");
 //		info += "\n(bonus) Pair with Max Num of Common Pairs -> "+ (((assessment & BIT_PAIR_WITH_MAX_NUM_OF_COMMON_NEIGHBORS) == 0)? "OK": "Wrong answer");
 //		info += "\n(bonus) Max Num Of Common Neighbors (" + maxNumOfCommonNeighbors + ") -> "+ (((assessment & BIT_MAX_NUM_OF_COMMON_NEIGHBORS) == 0)? "OK": "Wrong answer");
