@@ -28,13 +28,13 @@ public class XGraphClient {
 	boolean verbose; // print information during the execution
 
 	public XGraphClient(boolean parVerbose, String parServerHost, int parServerPort, int parExecutionMode, int parnodes,
-						long parseed) {
+						long parSeed) {
 		serverHost = parServerHost;
 		serverPort = parServerPort;
 		executionMode = parExecutionMode;
 		verbose = parVerbose;
 		nodes = parnodes;
-		seed = parseed;
+		seed = parSeed;
 	}
 
 	public void initiate(GraphSearch gsearch) {

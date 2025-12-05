@@ -1,7 +1,7 @@
 package graphClient;
 
 public class Finals {
-	public static final String VERSION = "2024";
+	public static final String VERSION = "2025";
 
 	public static final boolean DEFAULT_VERBOSE_MODE = false;
 
